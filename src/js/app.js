@@ -1,11 +1,12 @@
 import {render} from 'react-dom';
 import React, {Component} from 'react';
+import ArticleList from "./Articles/ArticleList";
 
 class App extends Component{
    render(){
       return (
          <div className="wrapper">
-            <h1>Hello world</h1>
+            <ArticleList />
          </div>
       );
    }
