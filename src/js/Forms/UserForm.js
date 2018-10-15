@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
 
 class UserForm extends Component{
    static propTypes = {
@@ -12,9 +13,16 @@ class UserForm extends Component{
    };
 
    render(){
+
+      const options = [
+         { value: 'chocolate', label: 'Chocolate' },
+         { value: 'strawberry', label: 'Strawberry' },
+         { value: 'vanilla', label: 'Vanilla' }
+      ];
+
       return (
          <div>
-            Name: <input type="text" value={this.state.userName} onChange={this.handleUserChange} />
+            <Select options={options} />
          </div>
       );
    }
