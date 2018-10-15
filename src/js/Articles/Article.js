@@ -1,35 +1,49 @@
-import React, {Component} from 'react';
-import CommentList from './Comments/CommentList'
-class Article extends Component{
-   state = {
-      isOpen: false
+import React, {Component, PureComponent} from 'react';
+import CommentList from './Comments/CommentList';
+import PropTypes from "prop-types";
+import { CSSTransition } from 'react-transition-group'
+
+import './../../css/style.css';
+
+class Article extends PureComponent{
+   static propTypes = {
+      article: PropTypes.shape({
+         id: PropTypes.string.isRequired,
+         date: PropTypes.string.isRequired,
+         title: PropTypes.string.isRequired,
+         text: PropTypes.string.isRequired,
+         comments: PropTypes.array
+      }).isRequired,
+      //from accordion
+      openedArtID: PropTypes.string,
+      toggleOpen: PropTypes.func.isRequired
    };
 
    render(){
-      const {title, date, text} = this.props.article;
+      const {isOpen, toggleOpen, article} = this.props;
+      const {title, date} = article;
+
       return (
          <div className="each-article-container">
             <h4>{title} &mdash; <small>{new Date(date).toLocaleTimeString()}</small></h4>
-            <button className="article-toggler" onClick={ this.toggleArticle.bind(this) }>
-               { (this.state.isOpen) ? 'Hide article' : 'Show article' }</button>
-            {this.getBody()}
+            <button className="article-toggler" onClick={ toggleOpen }>
+               { (isOpen) ? 'Hide article' : 'Show article' }</button>
+            <CSSTransition in={isOpen} timeout={2000} classNames="fade">
+               {this.getBody()}
+            </CSSTransition>
          </div>
       );
    }
-
    getBody(){
-      const { text, comments } = this.props.article;
-      return (this.state.isOpen)
+      const {isOpen, article} = this.props;
+      const { text, comments } = article;
+      return (isOpen)
          ?
-         <section className="article-text-container">
+         <section>
             { text }
             <CommentList comments={ comments } />
          </section>
-         : ''
-   }
-
-   toggleArticle(){
-      this.setState({ isOpen: ! this.state.isOpen })
+         : <section>&nbsp;</section>
    }
 
 }
