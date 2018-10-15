@@ -15,7 +15,12 @@ class ArticleList extends Component{
    render(){
       const {openedArtID, toggleAccordion} = this.props;
       const articleComponents = articles.map( (article) =>
-         <li key={article.id}><Article isOpen={openedArtID === article.id} article={article} toggleOpen={toggleAccordion(article.id) }/></li>
+         <li key={article.id}>
+            <Article
+               isOpen={openedArtID === article.id}
+               article={article}
+               toggleOpen={toggleAccordion(article.id) }/>
+         </li>
       );
       return (
          <ol className="articles-container">

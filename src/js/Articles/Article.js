@@ -1,8 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import CommentList from './Comments/CommentList';
 import PropTypes from "prop-types";
+import { CSSTransition } from 'react-transition-group'
 
-class Article extends Component{
+import './../../css/style.css';
+
+class Article extends PureComponent{
    static propTypes = {
       article: PropTypes.shape({
          id: PropTypes.string.isRequired,
@@ -18,28 +21,29 @@ class Article extends Component{
 
    render(){
       const {isOpen, toggleOpen, article} = this.props;
-      const {id, title, date} = article;
+      const {title, date} = article;
 
       return (
          <div className="each-article-container">
             <h4>{title} &mdash; <small>{new Date(date).toLocaleTimeString()}</small></h4>
             <button className="article-toggler" onClick={ toggleOpen }>
                { (isOpen) ? 'Hide article' : 'Show article' }</button>
-            {this.getBody()}
+            <CSSTransition in={isOpen} timeout={2000} classNames="fade">
+               {this.getBody()}
+            </CSSTransition>
          </div>
       );
    }
-
    getBody(){
       const {isOpen, article} = this.props;
       const { text, comments } = article;
       return (isOpen)
          ?
-         <section className="article-text-container">
+         <section>
             { text }
             <CommentList comments={ comments } />
          </section>
-         : ''
+         : <section>&nbsp;</section>
    }
 
 }

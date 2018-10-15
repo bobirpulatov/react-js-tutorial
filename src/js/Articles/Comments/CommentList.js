@@ -5,6 +5,11 @@ import PropTypes from 'prop-types';
 
 
 class CommentList extends Component{
+   componentWillMount(){ console.log('Component will mount'); }
+   componentDidMount(){ console.log('Component did mount'); }
+
+   componentWillUnmount(){ console.log('Component will unmount'); }
+
    render(){
       const {isOpen, toggleOpen} = this.props;
 
