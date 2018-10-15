@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Comment from "./Comment";
 import ToggleOpen from "../../Decorators/ToggleOpen";
+import PropTypes from 'prop-types';
+
 
 class CommentList extends Component{
    render(){
@@ -16,7 +18,8 @@ class CommentList extends Component{
 
    getBody(){
       const {comments} = this.props;
-      const commentComponents = (comments)
+
+      const commentComponents = (comments.length > 0)
          ? comments.map( (comment) => (<li key={comment.id}><Comment comment={ comment }/></li>) )
          : 'No comments added yet';
       return <ul className="comments">
@@ -24,5 +27,21 @@ class CommentList extends Component{
       </ul>;
    }
 }
+
+CommentList.propTypes = {
+   isOpen: PropTypes.bool.isRequired,
+   toggleOpen: PropTypes.func.isRequired,
+   comments: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      user: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired
+   }))
+};
+
+CommentList.defaultProps = {
+   comments: []
+};
+
+
 
 export default ToggleOpen(CommentList);
