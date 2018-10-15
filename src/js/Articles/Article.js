@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
-import CommentList from './Comments/CommentList'
+import CommentList from './Comments/CommentList';
+import ToggleOpen from './../Decorators/ToggleOpen';
+
+
 class Article extends Component{
-   state = {
-      isOpen: false
-   };
 
    render(){
       const {title, date, text} = this.props.article;
+      const {isOpen, toggleOpen} = this.props;
+
       return (
          <div className="each-article-container">
             <h4>{title} &mdash; <small>{new Date(date).toLocaleTimeString()}</small></h4>
-            <button className="article-toggler" onClick={ this.toggleArticle.bind(this) }>
-               { (this.state.isOpen) ? 'Hide article' : 'Show article' }</button>
+            <button className="article-toggler" onClick={ toggleOpen }>
+               { (isOpen) ? 'Hide article' : 'Show article' }</button>
             {this.getBody()}
          </div>
       );
@@ -19,7 +21,7 @@ class Article extends Component{
 
    getBody(){
       const { text, comments } = this.props.article;
-      return (this.state.isOpen)
+      return (this.props.isOpen)
          ?
          <section className="article-text-container">
             { text }
@@ -28,9 +30,5 @@ class Article extends Component{
          : ''
    }
 
-   toggleArticle(){
-      this.setState({ isOpen: ! this.state.isOpen })
-   }
-
 }
-export default Article;
+export default ToggleOpen(Article);
