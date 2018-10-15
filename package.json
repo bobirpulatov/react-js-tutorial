@@ -28,6 +28,7 @@
     "css-loader": "^1.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
+    "react-day-picker": "^7.2.4",
     "react-dom": "^16.5.2",
     "react-select": "^2.1.0",
     "react-transition-group": "^2.5.0",
