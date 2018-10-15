@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import CommentList from './Comments/CommentList';
 import PropTypes from "prop-types";
 
-class Article extends Component{
+class Article extends PureComponent{
    static propTypes = {
       article: PropTypes.shape({
          id: PropTypes.string.isRequired,
@@ -29,7 +29,6 @@ class Article extends Component{
          </div>
       );
    }
-
    getBody(){
       const {isOpen, article} = this.props;
       const { text, comments } = article;
