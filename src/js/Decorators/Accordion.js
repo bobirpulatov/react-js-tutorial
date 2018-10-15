@@ -6,15 +6,14 @@ export default (OrgComponent) => class WrapperComponent extends Component{
    } ;
    render(){
       return (
-         <OrgComponent {...this.props} openedArtID={ this.state.openedArticleID } toggleAccordion={this.toggleAccordion.bind(this)} />
+         <OrgComponent {...this.props} openedArtID={ this.state.openedArticleID } toggleAccordion={this.toggleAccordion} />
       );
    }
 
-   toggleAccordion(openedArticleID){
-      console.log(openedArticleID);
+   toggleAccordion = (openedArticleID) => ev => {
       if( this.state.openedArticleID === openedArticleID)
          openedArticleID = null;
 
-      this.setState({ openedArticleID })
+      this.setState({ openedArticleID: openedArticleID })
    }
 }
