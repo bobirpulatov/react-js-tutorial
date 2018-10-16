@@ -4,32 +4,37 @@ class AddNewComponent extends Component{
   state = {
     user: '',
     text: ''
-  }
+  };
+
   render(){
     const {user, text} = this.state;
-    const userInvalid = ( user.length < 15 && user.length > 5 );
-    const textInvalid = ( text.length < 50 && text.length > 20);
     return (
       <div className="add-comment-block">
         <span>Add new comment</span><br />
-        <input type="text" className={ (userInvalid)? '' : 'input-error' }
-            name="user" onChange={this.logUser} value={user} placeholder="Name"/>
+        <input type="text" className={ this.getClassInput('user') }
+            name="user" onChange={this.logComment('user')} value={user} placeholder="Name"/>
         &nbsp;
-        <input type="text" className={ (textInvalid)? '' : 'input-error' }
-            name="text" onChange={this.logText} value={text} placeholder="Text"/>
+        <input type="text" className={ this.getClassInput('text', 20, 50) }
+            name="text" onChange={this.logComment('text')} value={text} placeholder="Text"/>
         &nbsp;&nbsp;
-        <button>Add comment</button>
+        <button>Add comment</button> <br />
+         <span className={ this.getClassLabel('user') }>User name error</span>
+         <span className={ this.getClassLabel('text', 20, 50) }>Text error</span>
       </div>
     );
   }
 
-  logUser = (e) => {
-    this.setState({user: e.target.value });
-  }
-
-  logText = (e) => {
-    this.setState({text: e.target.value });
-  }
+   logComment = type => (e) => {
+      this.setState({[type]: e.target.value });
+   };
+   getClassLabel = (type, a=5, b=15) => {
+      const inputValid = ( this.state[type].length < b && this.state[type].length > a );
+      return (inputValid) ? 'label-error-hide' : 'label-error-show';
+   };
+   getClassInput = (type, a=5, b=15) => {
+      const inputValid = ( this.state[type].length < b && this.state[type].length > a );
+      return (inputValid) ? '' : 'input-error';
+   };
 }
 
 export default AddNewComponent;

@@ -2,6 +2,8 @@ import React, {Component, PureComponent} from 'react';
 import CommentList from './Comments/CommentList';
 import PropTypes from "prop-types";
 import { CSSTransition } from 'react-transition-group'
+import {connect} from 'react-redux';
+import {deleteArticle} from "../AC";
 
 import './../../css/style.css';
 
@@ -27,13 +29,20 @@ class Article extends PureComponent{
          <div className="each-article-container">
             <h4>{title} &mdash; <small>{new Date(date).toLocaleTimeString()}</small></h4>
             <button className="article-toggler" onClick={ toggleOpen }>
-               { (isOpen) ? 'Hide article' : 'Show article' }</button>
+               { (isOpen) ? 'Hide article' : 'Show article' }</button>&nbsp;
+            <button className="article-remover" onClick={ this.handleDelete }>Delete me</button>
             <CSSTransition in={isOpen} timeout={2000} classNames="fade">
                {this.getBody()}
             </CSSTransition>
          </div>
       );
    }
+
+   handleDelete = () => {
+      const {deleteArticle, article} = this.props;
+      deleteArticle(article.id)
+   };
+
    getBody(){
       const {isOpen, article} = this.props;
       const { text, comments } = article;
@@ -47,4 +56,4 @@ class Article extends PureComponent{
    }
 
 }
-export default Article;
+export default connect(null, {deleteArticle})(Article);

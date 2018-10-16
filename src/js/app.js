@@ -1,16 +1,20 @@
 import {render} from 'react-dom';
 import React, {Component} from 'react';
 import ArticleList from "./Articles/ArticleList";
-import UserForm from "./Forms/UserForm";
-import DatePicker from './Forms/DatePicker';
+import store from './store';
+import Counter from './Counter';
+import {Provider} from 'react-redux';
+
+
+//import UserForm from "./Forms/UserForm";
+//import DatePicker from './Forms/DatePicker';
 
 
 class App extends Component{
    render(){
-
-
       return (
          <div className="wrapper">
+            <Counter />
             <ArticleList />
          </div>
       );
@@ -19,6 +23,9 @@ class App extends Component{
 }
 
 render(
-   <App />,
+   <Provider store={store}>
+      <App />
+   </Provider>
+   ,
    document.getElementById('root')
    );
