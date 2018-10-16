@@ -20,3 +20,11 @@
 .input-error{
   border-color: red;
 }
+
+.label-error-show{
+    display: block;
+    color: red;
+}
+.label-error-hide{
+    display: none;
+}

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {articles} from './../fixtures';
 import Article from './Article';
 import accordion from "../Decorators/Accordion";
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 
 class ArticleList extends Component{
 
@@ -13,7 +14,7 @@ class ArticleList extends Component{
    };
 
    render(){
-      const {openedArtID, toggleAccordion} = this.props;
+      const {openedArtID, toggleAccordion, articles} = this.props;
       const articleComponents = articles.map( (article) =>
          <li key={article.id}>
             <Article
@@ -30,4 +31,6 @@ class ArticleList extends Component{
    }
 }
 
-export default accordion(ArticleList);
+export default connect( ({articles}) => ({
+   articles
+}))(accordion(ArticleList));
