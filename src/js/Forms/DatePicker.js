@@ -69,15 +69,15 @@ class DatePicker extends Component{
             to: day,
             enteredTo: day,
          });
-         this.props.setDateRange(from, day);
+         this.props.setDateRangeToProps(from, day);
       }
    };
 
-
    resetDateRange = () => {
-      this.props.setDateRange();
+      this.props.setDateRangeToProps();
       this.handleResetClick();
    };
+
    handleDayMouseEnter = (day) => {
       const { from, to } = this.state;
       if (!this.isSelectingFirstDay(from, to, day)) {
@@ -92,4 +92,11 @@ class DatePicker extends Component{
 }
 
 
-export default connect( null, {setDateRange} )(DatePicker);
+export default connect( null, {
+  setDateRangeToProps: (from=null, to=null) => (
+     {
+        type: 'SET_DATE_RANGE',
+        payload: { from, to }
+     }
+   )
+} )(DatePicker);
