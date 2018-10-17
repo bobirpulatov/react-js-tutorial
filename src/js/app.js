@@ -7,13 +7,14 @@ import {Provider} from 'react-redux';
 
 
 //import UserForm from "./Forms/UserForm";
-//import DatePicker from './Forms/DatePicker';
+import DatePicker from './Forms/DatePicker';
 
 
 class App extends Component{
    render(){
       return (
          <div className="wrapper">
+            <DatePicker />
             <Counter />
             <ArticleList />
          </div>

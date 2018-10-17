@@ -3,6 +3,6 @@ import counterReducer from './counter'
 import articleReducer from './articles'
 
 export default combineReducers({
-   count: counterReducer,
+   countFromReducer: counterReducer,
    articles: articleReducer
 });

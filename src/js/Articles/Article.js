@@ -22,12 +22,13 @@ class Article extends PureComponent{
    };
 
    render(){
+      console.log('-----!!!', this.props);
       const {isOpen, toggleOpen, article} = this.props;
       const {title, date} = article;
 
       return (
          <div className="each-article-container">
-            <h4>{title} &mdash; <small>{new Date(date).toLocaleTimeString()}</small></h4>
+            <h4>{title} &mdash; <small>{new Date(date).toLocaleDateString()}</small></h4>
             <button className="article-toggler" onClick={ toggleOpen }>
                { (isOpen) ? 'Hide article' : 'Show article' }</button>&nbsp;
             <button className="article-remover" onClick={ this.handleDelete }>Delete me</button>
@@ -56,4 +57,6 @@ class Article extends PureComponent{
    }
 
 }
-export default connect(null, {deleteArticle})(Article);
+export default connect( (state) => ({
+   articles: state.articles
+}), {deleteArticle})(Article);

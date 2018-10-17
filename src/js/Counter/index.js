@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {increment} from './../AC';
+import {increment, decrement, reset} from './../AC';
 import {connect} from 'react-redux';
 
 
@@ -7,20 +7,33 @@ class Counter extends Component{
    render(){
       return (
          <div>
-            <h2>{this.props.counter}</h2>
+            <h2>{this.props.counter2}</h2>
             <button onClick={this.handleIncrement}>IncrementMe</button>
+            <button onClick={this.handleDecrement}>DecrementMe</button>
+            <button onClick={this.handleReset}>ResetMe</button>
          </div>
       );
    }
    handleIncrement = () => {
-      const { increment } = this.props;
-      increment();
-   }
+      this.props.increment();
+   };
+
+   handleDecrement = () => {
+      this.props.decrement();
+   };
+
+   handleReset = () => {
+      this.props.reseting();
+   };
 }
 
 
 export default connect (
-   (state) => ({
-      counter: state.count
+   (reducer) => ({
+      counter2: reducer.countFromReducer
    }),
-   {increment})(Counter);
+   {
+      increment: increment,
+      decrement: decrement,
+      reseting: reset
+   })(Counter);
