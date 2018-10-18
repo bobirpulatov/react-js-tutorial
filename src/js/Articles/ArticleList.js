@@ -3,7 +3,7 @@ import Article from './Article';
 import accordion from "../Decorators/Accordion";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-
+import Counter from './../Counter';
 
 class ArticleList extends Component{
 
@@ -14,6 +14,7 @@ class ArticleList extends Component{
    };
 
    render(){
+      console.log('upd-art-list');
       const {openedArtID, toggleAccordion, articles} = this.props;
       const articleComponents = articles.map( (article) =>
          <li key={article.id}>
@@ -24,9 +25,13 @@ class ArticleList extends Component{
          </li>
       );
       return (
-         <ol className="articles-container">
-            {articleComponents}
-         </ol>
+         <div className="all-blocks">
+            <Counter />
+            <ol className="articles-container">
+               {articleComponents}
+            </ol>
+         </div>
+
       );
    }
 }

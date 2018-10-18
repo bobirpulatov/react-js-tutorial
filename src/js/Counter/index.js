@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 class Counter extends Component{
    render(){
+      console.log('upd-counter');
       return (
          <div>
             <h2>{this.props.counter2}</h2>
