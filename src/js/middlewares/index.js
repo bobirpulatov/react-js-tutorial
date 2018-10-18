@@ -1,5 +1,5 @@
 export default store => next => action => {
-   console.log('----- currStateBefore:', store.getState());
+   console.log(action);
    next(action);
-   console.log('----- currStateAfter:', store.getState());
+
 };
