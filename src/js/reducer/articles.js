@@ -1,4 +1,4 @@
-import {articles as defaultArticles} from '../fixtures';
+import {normalizedArticles as defaultArticles} from '../fixtures';
 import {DELETE_ARTICLE, SET_DATE_RANGE} from "../AC/constants";
 
 export default (articleState=defaultArticles, action) => {
