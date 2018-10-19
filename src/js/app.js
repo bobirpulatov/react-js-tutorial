@@ -2,6 +2,7 @@ import {render} from 'react-dom';
 import React, {Component} from 'react';
 import ArticleList from "./Articles/ArticleList";
 import store from './store';
+import Counter from './Counter';
 import {Provider} from 'react-redux';
 
 
@@ -14,7 +15,7 @@ class App extends Component{
       return (
          <div className="wrapper">
             <DatePicker />
-
+            <Counter />
             <ArticleList />
          </div>
       );
