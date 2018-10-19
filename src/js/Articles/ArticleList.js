@@ -26,7 +26,6 @@ class ArticleList extends Component{
       );
       return (
          <div className="all-blocks">
-            <Counter />
             <ol className="articles-container">
                {articleComponents}
             </ol>

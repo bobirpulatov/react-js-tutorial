@@ -45,12 +45,12 @@ class Article extends PureComponent{
 
    getBody(){
       const {isOpen, article} = this.props;
-      const { text, comments } = article;
+      const { text, comments, id } = article;
       return (isOpen)
          ?
          <section>
             { text }
-            <CommentList comments={ comments } />
+            <CommentList comments={ comments } artId={id} />
          </section>
          : <section>&nbsp;</section>
    }

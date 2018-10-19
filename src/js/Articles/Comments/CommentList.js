@@ -14,7 +14,6 @@ class CommentList extends Component{
       const {isOpen} = this.state;
       return (
          <div className="comments-container"><br/>
-          <AddNewComment />
             <button onClick={this.toggleArticle}>{ (isOpen) ? 'Hide comments' : 'Show comments' }</button>
             { (isOpen) ? this.getBody() : '' }
          </div>
@@ -26,9 +25,13 @@ class CommentList extends Component{
       const commentComponents = (realComments.length > 0)
          ? realComments.map( (comment) => (<li key={comment.id}><Comment comment={ comment }/></li>) )
          : 'No comments added yet';
-      return <ul className="comments">
-         {commentComponents}
-      </ul>;
+      return <div>
+            <ul className="comments">
+               <AddNewComment artId={this.props.artId}/>
+               {commentComponents}
+            </ul>;
+         </div>
+
    }
    toggleArticle =() => {
       if (! this.state.isOpen)

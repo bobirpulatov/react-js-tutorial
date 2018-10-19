@@ -19,6 +19,17 @@ export default (articleState=defaultArticles, action) => {
          }else
             return defaultArticles;
       }
+      case 'ADD_COMMENT': {
+         const {newComment, payload} = action;
+         console.log(newComment.id, payload.artId);
+         const artsWithNewComment = articleState.map((article) => {
+            if (article.id === payload.artId){
+               article.comments = [...article.comments, newComment.id];
+            }
+            return article;
+         });
+         articleState = artsWithNewComment;
+      }
    }
    return articleState;
 }

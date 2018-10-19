@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 class AddNewComponent extends Component{
   state = {
@@ -29,7 +30,8 @@ class AddNewComponent extends Component{
      if (   ( user && user.length > 5 && user.length < 15 )
         &&  ( text && text.length > 20 && text.length < 50 ) )
      {
-        console.log('-------------', 'adding comment');
+        this.setState({ user: null, text: null });
+        this.props.addCommentDB(this.state, this.props.artId);
      }
   };
 
@@ -50,4 +52,13 @@ class AddNewComponent extends Component{
    };
 }
 
-export default AddNewComponent;
+export default connect( (state) => ({
+   articleId: state.articles
+}), {
+   addCommentDB: ({user, text}, artId) => {
+      return {
+         type: 'ADD_COMMENT',
+         payload: {user, text, artId }
+      }
+   }
+})(AddNewComponent);
