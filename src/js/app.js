@@ -5,7 +5,7 @@ import store from './store';
 import {Provider} from 'react-redux';
 
 
-//import UserForm from "./Forms/UserForm";
+import UserForm from "./Forms/UserForm";
 import DatePicker from './Forms/DatePicker';
 
 
@@ -13,8 +13,8 @@ class App extends Component{
    render(){
       return (
          <div className="wrapper">
+            <UserForm />
             <DatePicker />
-
             <ArticleList />
          </div>
       );
