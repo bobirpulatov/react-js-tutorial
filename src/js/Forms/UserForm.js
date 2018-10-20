@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {getCityByZip} from '../AC';
+
 class UserForm extends Component{
    state = {
       zip: ''
@@ -23,17 +25,10 @@ class UserForm extends Component{
    findZip = () => {
       const {zip} = this.state;
       if (zip.length > 0){
-         this.props.getCityByZipCode(zip);
+         this.props.getCityByZip(zip);
       }
    }
 }
 export default connect(
    (state) => ({ city: state.city }),
-   {
-      getCityByZipCode: (zipCode) => (
-         {
-            type: 'GET_ZIP_CODE',
-            payload: { zipCode }
-         }
-      )
-   })(UserForm);
+   { getCityByZip })(UserForm);

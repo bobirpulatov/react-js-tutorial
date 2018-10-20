@@ -1,4 +1,5 @@
 import {DELETE_ARTICLE, INCREMENT, RESET, DECREMENT, SET_DATE_RANGE} from './constants';
+import $ from "jquery";
 
 export function increment() {
    return {
@@ -27,4 +28,23 @@ export function setDateRange(from=null, to=null) {
       type: SET_DATE_RANGE,
       payload: { from, to }
    }
+}
+
+export function getCityByZip(zipCode) {
+   return (dispatch) => {
+      let city = "";
+      dispatch({ type: 'LOADING', payload : { city } });
+
+      $.get('http://ziptasticapi.com/' + zipCode)
+         .done(function (data) {
+            try{
+               data = $.parseJSON(data);
+               if( data.error )  city = 'Not found';
+               else              city = data.city + ", " + data.state;
+               dispatch({type: 'GET_ZIP_CODE', city});
+
+            }catch (e) { dispatch({type: 'ERROR', city}); }
+         })
+         .fail(function () { dispatch({type: 'ERROR', city}); });
+   };
 }
