@@ -1,35 +1,39 @@
 import React, {Component} from 'react';
-import {findDOMNode} from 'react-dom';
-import PropTypes from 'prop-types';
-import Select from 'react-select';
-
+import {connect} from 'react-redux';
 class UserForm extends Component{
-   static propTypes = {
-
-   };
-
    state = {
-      userName: ''
+      zip: ''
    };
 
    render(){
-
-      const options = [
-         { value: 'chocolate', label: 'Chocolate' },
-         { value: 'strawberry', label: 'Strawberry' },
-         { value: 'vanilla', label: 'Vanilla' }
-      ];
-
       return (
          <div>
-            <Select options={options} />
+            <input type="text" maxLength="6" value={this.state.zip} onChange={this.logZip}/>
+            <button onClick={ this.findZip }>Find</button>
+            <p>{ this.props.city }</p>
          </div>
       );
    }
+   logZip = (ev) =>{
+     this.setState({
+        zip: ev.target.value
+     });
+   };
 
-   handleUserChange = (ev) => {
-      console.log(findDOMNode(ev.target));
-      this.setState({ userName: ev.target.value });
+   findZip = () => {
+      const {zip} = this.state;
+      if (zip.length > 0){
+         this.props.getCityByZipCode(zip);
+      }
    }
 }
-export default UserForm;
+export default connect(
+   (state) => ({ city: state.city }),
+   {
+      getCityByZipCode: (zipCode) => (
+         {
+            type: 'GET_ZIP_CODE',
+            payload: { zipCode }
+         }
+      )
+   })(UserForm);
