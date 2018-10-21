@@ -1,9 +1,11 @@
+const defCity = '';
 
-const defCity = 'Loading...';
 export default (city = defCity, action) => {
-   console.log(action);
-   if( action.city && action.city.length > 0)
-      city = action.city;
-   else city = defCity;
+   switch (action.type){
+      case 'GET_ZIP_CODE': city = action.city; break;
+      case 'ERROR':        city = 'Cannot find a place'; break;
+      case 'LOADING':      city = "Loading..."; break;
+   }
+
    return city;
 }
