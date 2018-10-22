@@ -20,7 +20,8 @@ const conf = {
       ]
    },
    devServer: {
-      overlay: true
+      overlay: true,
+      historyApiFallback: true
    }
 };
 

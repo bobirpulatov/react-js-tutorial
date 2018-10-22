@@ -6,6 +6,5 @@ export default (city = defCity, action) => {
       case 'ERROR':        city = 'Cannot find a place'; break;
       case 'LOADING':      city = "Loading..."; break;
    }
-
    return city;
 }
