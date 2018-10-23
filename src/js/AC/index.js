@@ -1,5 +1,6 @@
 import {DELETE_ARTICLE, INCREMENT, RESET, DECREMENT, SET_DATE_RANGE} from './constants';
 import $ from "jquery";
+import {push} from 'react-router-redux'
 
 export function increment() {
    return {
@@ -39,8 +40,11 @@ export function getCityByZip(zipCode) {
          .done(function (data) {
             try{
                data = $.parseJSON(data);
-               if( data.error )  city = 'Not found';
-               else              city = data.city + ", " + data.state;
+               if( data.error ) {
+                  city = 'Not found';
+                  dispatch(push('/zipCode'));
+               }else
+                  city = data.city + ", " + data.state;
                dispatch({type: 'GET_ZIP_CODE', city});
 
             }catch (e) { dispatch({type: 'ERROR', city}); }

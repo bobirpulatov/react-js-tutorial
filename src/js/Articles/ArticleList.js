@@ -14,7 +14,6 @@ class ArticleList extends Component{
    };
 
    render(){
-      console.log('upd-art-list');
       const {openedArtID, toggleAccordion, articles} = this.props;
       const articleComponents = articles.map( (article) =>
          <li key={article.id}>
