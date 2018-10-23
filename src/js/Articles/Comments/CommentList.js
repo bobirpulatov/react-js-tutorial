@@ -3,14 +3,20 @@ import Comment from "./Comment";
 import PropTypes from 'prop-types';
 import AddNewComment from './../../Forms/AddNewComment';
 import {connect} from 'react-redux';
+import propTypes from 'prop-types'
 
 class CommentList extends Component{
+   static contextTypes = {
+      store: propTypes.object,
+      router: propTypes.object
+   };
 
    state = {
       isOpen: false
    };
 
    render(){
+      console.log(this.context);
       const {isOpen} = this.state;
       return (
          <div className="comments-container"><br/>
